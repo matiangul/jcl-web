@@ -1,0 +1,20 @@
+{
+  "name": "train-motion-detector",
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "firebase": "~2.3.2",
+    "google-chart": "GoogleWebComponents/google-chart#~1.0.4"
+  }
+}

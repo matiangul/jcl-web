@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Train motion detector</title>
+    <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+    <script src="bower_components/firebase/firebase.js"></script>
+    <link rel="import" href="bower_components/google-chart/google-chart.html">
+</head>
+<body>
+<h1 id="ask">Please wait for jcl data...</h1>
+<google-chart
+        id='line_chart'
+        type='line'
+        options='{"title": "All states"}'
+        cols='[{"label": "Time", "type": "string"},{"label": "Hum", "type": "number"},{"label": "Temp", "type": "number"},{"label": "Pre", "type": "number"}]'
+        rows='[]'
+        style="width: 100%; height: 800px;">
+</google-chart>
+<script>
+    window.addEventListener('WebComponentsReady', function(e) {
+        var chart = document.getElementById('line_chart');
+        var ask = document.getElementById('ask');
+        var myFirebaseRef = new Firebase("https://intense-torch-4850.firebaseio.com/jcl");
+        var measurements = [];
+        myFirebaseRef.child("data").once("value", function(snapshot) {
+            snapshot.forEach(function(acc) {
+                var measurement = acc.val();
+                measurements.push([measurement['time'], measurement['hum'], measurement['temp'], measurement['pre']]);
+            });
+            chart.rows = measurements;
+            ask.style.display = 'none';
+        });
+    });
+</script>
+</body>
+</html>

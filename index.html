@@ -23,7 +23,7 @@
         var ask = document.getElementById('ask');
         var myFirebaseRef = new Firebase("https://intense-torch-4850.firebaseio.com/jcl");
         var measurements = [];
-        myFirebaseRef.child("data").once("value", function(snapshot) {
+        myFirebaseRef.child("status").once("value", function(snapshot) {
             snapshot.forEach(function(acc) {
                 var measurement = acc.val();
                 measurements.push([measurement['time'], measurement['hum'], measurement['temp'], measurement['pre']]);
